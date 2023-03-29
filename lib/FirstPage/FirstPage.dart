@@ -6,7 +6,7 @@ import 'package:navpages/Helpers/NavigationHelper/Routes.dart';
 import 'FirstPageVM.dart';
 
 class FirstPage extends StatefulWidget{
-  const FirstPage({super.key, required int data});
+  const FirstPage({super.key});
   @override
   State<FirstPage> createState() => _FirstPageState();
 }
@@ -18,7 +18,7 @@ class _FirstPageState extends State<FirstPage> {
     super.initState();
     _FirstPageVM.navigationStream.stream.listen((event) {
       if(event is NavigatorPush){
-        context.push(pageConfig: Pages.secondPageConfig);
+        context.push(pageConfig: Pages.secondPageConfig, data: _FirstPageVM.count);
       }
     });
    
@@ -33,7 +33,7 @@ class _FirstPageState extends State<FirstPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const Text("12"),
+            Text(_FirstPageVM.count.toString()),
             FloatingActionButton.extended(onPressed: _FirstPageVM.navigationtosecondpage , label: const Text("Multiply by 2"),)
           ],
         ))

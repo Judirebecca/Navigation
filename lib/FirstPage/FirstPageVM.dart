@@ -5,7 +5,8 @@ import 'FirstPageModel.dart';
 
 
 class FirstPageVM extends FirstPageModel{
+
  void navigationtosecondpage(){
-    navigationStream.add(NavigatorPush(pageConfig: Pages.secondPageConfig, data: 12));
+    navigationStream.add(NavigatorPush(pageConfig: Pages.secondPageConfig, data: count));
   }
 }

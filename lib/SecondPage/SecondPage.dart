@@ -6,19 +6,21 @@ import 'SecondpageVM.dart';
 
 
 class SecondPage extends StatefulWidget{
-  const SecondPage({super.key, required int data});
+  const SecondPage({super.key, required this.data});
+  final int data;
   @override
   State<SecondPage> createState() => _SecondPageState();
+  
 }
 
 class _SecondPageState extends State<SecondPage> {
-  final SecondPageVM _SecondPageVM = SecondPageVM();
+ late final SecondPageVM _SecondPageVM = SecondPageVM(count: widget.data);
   @override
   void initState(){
     super.initState();
     _SecondPageVM.navigationStream.stream.listen((event) {
       if(event is NavigatorPop){
-        context.pop(data: 12*2);
+        context.pop(data: _SecondPageVM.count);
       }
     });
    
@@ -33,7 +35,8 @@ class _SecondPageState extends State<SecondPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const Text("24"),
+          const Text("Answer is "),
+          Text(_SecondPageVM.count.toString()),
           FloatingActionButton.extended(onPressed: _SecondPageVM.navigationtofirstpage, label: const Text("Back"),)
         ],))
       );
